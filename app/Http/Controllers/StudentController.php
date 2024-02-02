@@ -31,34 +31,22 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make(
-            array(
-                'name' => $request->fname,
-                'password' => $request->lname,
-                'email' => $request->email,
-                'password'=>$request->password
-            ),
-            array(
-                'fname' => 'required',
-                'lname' => 'required',
-                'email' => 'required|email|unique:users',
-                'password' => 'required|min:8'
-                )
-        );
+        $request->validate([
 
-        if ($validator->fails())
-    {
-        print_r($validator);
-        return Redirect::back()->withErrors($validator);
-        
-    }
+            'fname' => 'required|min:4|max:30',
+            'lname' => 'required|min:4|max:30',
+            'email' => 'required|email',
+            'fileToUpload' => 'required|mimes:pdf,png',
+            'password' => 'required'
+
+        ]);
 
         $student = new Student();
         $student->first_name = $request->fname;
         $student->last_name = $request->lname;
         $student->email = $request->email;
         $student->image = $request->fileToUpload->getClientOriginalName();
-        $student->password = $request->passsword;
+        $student->password = $request->password;
         if ($request->hasFile('fileToUpload')) {
             $file = $request->file('fileToUpload');
             $file->move('myImages', $file->getClientOriginalName());

@@ -39,7 +39,7 @@
             <td>{{ $item->email }}</td>
             <td><img src="{{url('myImages/'.$item->image)}}" height="50px" width="50px"></td>
             <td style="display: block ruby;">
-                <!-- <a href="{{url('/listingPage/'.$item->id)}}"><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModalCenter">View</button></a> -->
+                <a href="{{url('/viewStudent/'.$item->id)}}"><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModalCenter">View</button></a>
                 <a href="{{url('/editStudent/'.$item->id)}}"><button type="button" class="btn btn-warning btn-sm">Edit</button></a>
                 <a href="{{url('/deleteStudent/'.$item->id)}}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
             </td>
